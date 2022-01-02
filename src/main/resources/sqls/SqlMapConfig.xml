@@ -8,8 +8,4 @@
 		<typeAlias type="com.study.ansboard.vo.BoardVO" alias="BoardVO"/>
 	</typeAliases>
 	
-	<mappers>
-		<mapper resource="./sqls/*Mapper.xml"/>
-	</mappers>
-	
 </configuration>
