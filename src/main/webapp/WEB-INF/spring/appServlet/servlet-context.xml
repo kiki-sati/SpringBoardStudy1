@@ -25,6 +25,4 @@
 	<context:component-scan base-package="com.study.ansboard.service" />
 	<context:component-scan base-package="com.study.ansboard.dao" />
 	
-	
-	
 </beans:beans>
