@@ -14,5 +14,5 @@ public interface BoardDAO {
 
     void replyShape(BoardVO boardVO);
 
-    int replyWrite(BoardVO boardVO);
+    int writeReply(BoardVO boardVO);
 }

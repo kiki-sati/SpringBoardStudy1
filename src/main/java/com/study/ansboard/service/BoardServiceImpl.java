@@ -15,11 +15,11 @@ public class BoardServiceImpl implements BoardService{
 
     @Override
     public int write(BoardVO boardVO) throws Exception {
-        if (boardVO.getGNo() == 0) {
+        if (boardVO.getgNo() == 0) {
             return boardDAO.write(boardVO);
         } else {
             boardDAO.replyShape(boardVO);
-            return boardDAO.replyWrite(boardVO);
+            return boardDAO.writeReply(boardVO);
         }
     }
 

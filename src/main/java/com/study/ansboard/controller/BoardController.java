@@ -45,12 +45,21 @@ public class BoardController {
 		logger.info("write");
 		logger.info(boardVO.toString());
 		int result = boardService.write(boardVO);
-		return "redirect:board/list";
+		return "redirect:/board/list";
 	}
 
+	@RequestMapping(value="/writeReply", method=RequestMethod.GET)
+	public String writeReply(Model model,BoardVO boardVO) {
+		logger.info("move writeReply");
+		model.addAttribute("board", boardVO);
+		return "board/writeReply";
+	}
+
+
 	@RequestMapping(value="/write", method=RequestMethod.GET)
-	public String write() {
+	public String moveWrite(Model model, BoardVO boardVO) {
 		logger.info("move write");
+		model.addAttribute("board", boardVO);
 		return "board/write";
 	}
 

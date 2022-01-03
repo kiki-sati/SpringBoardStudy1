@@ -4,7 +4,9 @@
 <mapper namespace="com.study.ansboard.sqls.BoardMapper">
 
     <select id="list" resultType="BoardVO">
-        SELECT B_NO     bNo
+        <![CDATA[
+        SELECT
+               B_NO     bNo
              , TITLE    title
              , CONTENT  content
              , WRITER   writer
@@ -14,13 +16,17 @@
              , VIEW_CNT viewCnt
              , DATE_FORMAT(REG_DATE, '%Y/%m/%d %H:%i') regDate
         FROM tb_board
+        ORDER BY G_NO DESC, STEP ASC
+        ]]>
     </select>
 
     <select id="view" resultType="BoardVO">
-        SELECT B_NO     bNo
+        <![CDATA[
+        SELECT
+               B_NO     bNo
+             , WRITER   writer
              , TITLE    title
              , CONTENT  content
-             , WRITER   writer
              , G_NO     gNo
              , STEP     step
              , INDENT   indent
@@ -28,58 +34,61 @@
              , DATE_FORMAT(REG_DATE, '%Y/%m/%d %H:%i') regDate
         FROM tb_board
         WHERE B_NO = #{bNo}
+        ]]>
     </select>
 
     <insert id="write">
+        <![CDATA[
         INSERT INTO tb_board (
-                    B_NO
-                  , TITLE
-                  , CONTENT
-                  , WRITER
-                  , G_NO
-                  , STEP
-                  , INDENT
-                  , REG_DATE)
-            VALUE ( #{bNo}
-                  , #{title}
-                  , #{content}
-                  , #{writer}
-                  , #{gNO}
-                  , 0
-                  , 0
-                  , NOW()
-            )
-
+               B_NO
+             , WRITER
+             , TITLE
+             , CONTENT
+             , G_NO
+             , STEP
+             , INDENT
+             , REG_DATE
+        ) VALUE (
+               #{bNo}
+             , #{writer}
+             , #{title}
+             , #{content}
+             , #{bNo}
+             , 0
+             , 0
+             , NOW()
+        )
+        ]]>
     </insert>
 
     <update id="replyShape">
-        UPDATE
-        FROM tb_board
-        SET STEP = SETP+1
-        WHERE G_NO = #{gNO} AND STEP > #{step}
+        <![CDATA[
+        UPDATE tb_board
+            SET STEP = STEP +1
+        WHERE G_NO = #{gNo} AND STEP > #{step}
+        ]]>
     </update>
 
-    <insert id="replyWrite">
+    <insert id="writeReply">
+        <![CDATA[
         INSERT INTO tb_board (
-                               B_NO
-                             , TITLE
-                             , CONTENT
-                             , WRITER
-                             , G_NO
-                             , STEP
-                             , INDENT
-                             , REG_DATE)
-            VALUE (
-            #{bNo}
-            , #{title}
-            , #{content}
-            , #{writer}
-            , #{gNO}
-            , #{step}+1
-            , 0
-            , NOW()
-            )
-
+                  TITLE
+                , CONTENT
+                , WRITER
+                , G_NO
+                , STEP
+                , INDENT
+                , REG_DATE
+        ) VALUE (
+                  #{title}
+                , #{content}
+                , #{writer}
+                , #{gNo}
+                , #{step}+1
+                , #{indent}+1
+                , NOW()
+        )
+        ]]>
     </insert>
 
 </mapper>

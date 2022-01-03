@@ -8,9 +8,6 @@
     <title>게시판 리스트</title>
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
-
-
-
     <script>
         $(document).ready(function(){
             $('.move').on('click', function(){
@@ -18,9 +15,9 @@
                 if ( value == 'write') {
                     location.href='/board/write';
                 }else if ( value == 'view' ) {
-                    var no = $(this).parent('tr').children('td:nth-of-type(1)').html(); /*tr의 자식요소 td의 첫번째*/
-                    console.log(no);
-                    location.href='/board/view?bNo='+bNo;
+                    var bNo = $(this).parent('tr').children('td:nth-of-type(1)').html();
+                    console.log(bNo);
+                    location.href='/board/view?bNo=' + bNo;
                 }
             });
         });
@@ -44,16 +41,15 @@
         </thead>
 
         <tbody>
-        <tr>
-            <c:forEach items="${list}" var="list" >
+        <c:forEach items="${list}" var="list">
+            <tr>
                 <td>${list.bNo}</td>
                 <td class="move" style="cursor: pointer" data="view">${list.title}</td>
                 <td>${list.writer}</td>
                 <td>${list.regDate}</td>
                 <td>${list.viewCnt}</td>
-            </c:forEach>
-
-        </tr>
+            </tr>
+        </c:forEach>
         </tbody>
     </table>
 

@@ -35,8 +35,11 @@ public class BoardDAOImpl implements BoardDAO{
     }
 
     @Override
-    public int replyWrite(BoardVO boardVO) {
-        return sqlSession.insert(namespace+".replyWrite",boardVO);
+    public int writeReply(BoardVO boardVO) {
+        return sqlSession.insert(namespace + ".writeReply", boardVO);
     }
+
+
+
 
 }
