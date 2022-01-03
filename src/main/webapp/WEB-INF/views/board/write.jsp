@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
 <html>
@@ -8,6 +8,15 @@
     <title>게시판 리스트</title>
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+
+    <script>
+        // 게시판 이동
+        $(document).ready(function() {
+            $(".list").click(function() {
+                location.href = "/board/list";
+            });
+        });
+    </script>
 </head>
 <body>
 
@@ -23,6 +32,7 @@
         <textarea rows="10" class="form-control w-50 mb-sm-1" name="content"></textarea>
         <button type="submit" class="btn btn-primary" style="margin-left: 45%;">등록</button>
     </form>
+    <button type="button" class="btn btn-primary list">목록</button>
 </div>
 </body>
 </html>

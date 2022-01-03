@@ -9,15 +9,15 @@
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
     <script>
-        $(document).ready(function(){
-            $('.move').on('click', function(){
+        $(document).ready(function () {
+            $('.move').on('click', function () {
                 var value = $(this).attr('data');
-                if ( value == 'write') {
-                    location.href='/board/write';
-                }else if ( value == 'view' ) {
+                if (value == 'write') {
+                    location.href = '/board/write';
+                } else if (value == 'view') {
                     var bNo = $(this).parent('tr').children('td:nth-of-type(1)').html();
                     console.log(bNo);
-                    location.href='/board/view?bNo=' + bNo;
+                    location.href = '/board/view?bNo=' + bNo;
                 }
             });
         });
@@ -44,11 +44,18 @@
         <c:forEach items="${list}" var="list">
             <tr>
                 <td>${list.bNo}</td>
-                <td class="move" style="cursor: pointer" data="view">${list.title}</td>
+                <td class="move text-left" data="view" style="cursor: pointer;">
+                    <c:if test="${list.indent > 0 }">
+                        <c:set var="width" value="${list.indent*10}"></c:set>
+                        <img src="/resources/image/blank.png" width="${width}px">
+                        <span>&gt;</span>
+                    </c:if>
+                        ${list.title}</td>
                 <td>${list.writer}</td>
                 <td>${list.regDate}</td>
                 <td>${list.viewCnt}</td>
             </tr>
+
         </c:forEach>
         </tbody>
     </table>

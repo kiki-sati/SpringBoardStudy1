@@ -37,6 +37,34 @@
         ]]>
     </select>
 
+    <!-- 댓글출력 -->
+    <select id="commentList" resultType="CommentVO">
+		<![CDATA[
+        SELECT CM_IDX                                 cmIdx
+             , CM_CONTENT                             cmContent
+             , DATE_FORMAT(CM_DATE, '%Y/%m/%d %H:%i') cmDate
+             , CM_WRITER                              cmWriter
+        FROM t_comments
+        WHERE B_NO = #{bNo}
+        ORDER BY CM_DATE DESC
+        ]]>
+    </select>
+
+    <!-- 댓글 입력 -->
+    <insert id="insertComment" parameterType="CommentVO">
+        /* BoardDAO.insertComment */
+	 <![CDATA[
+        INSERT INTO t_comments ( CM_CONTENT
+                               , CM_DATE
+                               , CM_WRITER
+                               , POST_IDX)
+        VALUES ( #{cmContent}
+               , NOW()
+               , #{cmWriter}
+               , #{postIdx})
+        ]]>
+    </insert>
+
     <insert id="write">
         <![CDATA[
         INSERT INTO tb_board (

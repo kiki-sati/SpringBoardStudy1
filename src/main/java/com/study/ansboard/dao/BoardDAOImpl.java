@@ -1,6 +1,7 @@
 package com.study.ansboard.dao;
 
 import com.study.ansboard.vo.BoardVO;
+import com.study.ansboard.vo.CommentsVO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -13,6 +14,11 @@ public class BoardDAOImpl implements BoardDAO{
     @Autowired
     private SqlSession sqlSession;
     private static final String namespace="com.study.ansboard.sqls.BoardMapper";
+
+    @Override
+    public int writeComment(CommentsVO commentVO) {
+        return sqlSession.insert(namespace+".writeComment",commentVO);
+    }
 
     @Override
     public List<BoardVO> list() {
@@ -39,7 +45,10 @@ public class BoardDAOImpl implements BoardDAO{
         return sqlSession.insert(namespace + ".writeReply", boardVO);
     }
 
-
+    @Override
+    public List<CommentsVO> getCommentList(int bNo) {
+        return sqlSession.selectList(namespace+".commentList");
+    }
 
 
 }
