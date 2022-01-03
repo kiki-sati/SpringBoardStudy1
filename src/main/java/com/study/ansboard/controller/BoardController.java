@@ -39,6 +39,15 @@ public class BoardController {
 		
 		return "board/view";
 	}
+
+	@RequestMapping(value = "write", method = RequestMethod.POST)
+	public String write() {
+		logger.info("write");
+
+		return "";
+	}
+
+
 	
 	
 
