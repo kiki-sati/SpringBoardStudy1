@@ -12,8 +12,8 @@
 			value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
 		<property name="url"
 			value="jdbc:log4jdbc:mariadb://localhost:3306/board" />
-		<property name="username" value="bit" />
-		<property name="password" value="bit" />
+		<property name="username" value="test" />
+		<property name="password" value="1234" />
 	</bean>
 
 	<!-- SqlSessionFactory 객체 설정 -->

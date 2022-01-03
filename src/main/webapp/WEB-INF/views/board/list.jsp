@@ -6,18 +6,26 @@
 <head>
     <meta charset="UTF-8">
     <title>게시판 리스트</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
 
 
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-
-</head>ㄴ
+    <script>
+        $(document).ready(function(){
+            $('.move').on('click', function(){
+                var value = $(this).attr('data');
+                if ( value == 'write') {
+                    location.href='/board/write';
+                }else if ( value == 'view' ) {
+                    var no = $(this).parent('tr').children('td:nth-of-type(1)').html(); /*tr의 자식요소 td의 첫번째*/
+                    console.log(no);
+                    location.href='/board/view?bNo='+bNo;
+                }
+            });
+        });
+    </script>
+</head>
 <body>
 
 <div class="container">
@@ -37,11 +45,14 @@
 
         <tbody>
         <tr>
-            <td>1</td>
-            <td>하하</td>
-            <td>박순이</td>
-            <td>2012.11.11</td>
-            <td>1</td>
+            <c:forEach items="${list}" var="list" >
+                <td>${list.bNo}</td>
+                <td class="move" style="cursor: pointer" data="view">${list.title}</td>
+                <td>${list.writer}</td>
+                <td>${list.regDate}</td>
+                <td>${list.viewCnt}</td>
+            </c:forEach>
+
         </tr>
         </tbody>
     </table>
