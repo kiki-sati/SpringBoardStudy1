@@ -1,7 +1,6 @@
 package com.study.ansboard.dao;
 
 import com.study.ansboard.vo.BoardVO;
-import com.study.ansboard.vo.CommentsVO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -14,18 +13,6 @@ public class BoardDAOImpl implements BoardDAO{
     @Autowired
     private SqlSession sqlSession;
     private static final String namespace="com.study.ansboard.sqls.BoardMapper";
-
-    /* 댓글 출력 */
-    @Override
-    public List<CommentsVO> getCommentList(int bNo) {
-        return sqlSession.selectList(namespace+".commentList");
-    }
-
-    /* 댓글 작성 */
-    @Override
-    public int writeComment(CommentsVO commentVO) {
-        return sqlSession.insert(namespace+".writeComment",commentVO);
-    }
 
     /* 게시글 목록 */
     @Override
@@ -60,6 +47,12 @@ public class BoardDAOImpl implements BoardDAO{
     @Override
     public int writeReply(BoardVO boardVO) {
         return sqlSession.insert(namespace + ".writeReply", boardVO);
+    }
+
+    /* 조회수 증가 */
+    @Override
+    public void viewCnt(int bNo) {
+        sqlSession.update(namespace+".viewCnt", bNo);
     }
 
 }

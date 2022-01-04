@@ -3,10 +3,12 @@
 
 <mapper namespace="com.study.ansboard.sqls.BoardMapper">
 
-    <!-- 게시판 리스트 출력 -->
-    <select id="list" resultType="BoardVO">
-        /* BoardDAO.list */
-        <![CDATA[
+    <select id="list" resultType="BoardVO" parameterType="BoardVO">
+        /*
+        BoardDAO.list
+        게시판 리스트 출력
+        */
+
         SELECT
                B_NO                                    bNo
              , TITLE                                   title
@@ -16,14 +18,13 @@
              , STEP                                    step
              , INDENT                                  indent
              , VIEW_CNT                                viewCnt
-             , DATE_FORMAT(REG_DATE, '%Y/%m/%d %H:%i') regDate
+             , DATE_FORMAT(REG_DATE, &#39;%Y/%m/%d %H:%i&#39;) regDate
         FROM tb_board
         ORDER BY G_NO DESC, STEP ASC
-        ]]>
-    </select>
 
+    </select>
     <!-- 게시글 내용 출력 -->
-    <select id="view" resultType="BoardVO">
+    <select id="view" resultType="BoardVO" parameterType="BoardVO">
         /* BoardDAO.view */
         <![CDATA[
         SELECT
@@ -41,27 +42,12 @@
         ]]>
     </select>
 
-    <!-- 답글 정보 조회 -->
-    <select id="replyInfo" resultType="BoardVO">
-     /* BoardDAO.replyInfo */
-        <![CDATA[
-        SELECT
-             B_NO
-           , G_NO
-           , STEP
-           , INDENT
-        FROM tb_board
-        WHERE B_NO = #{boardParentSeq}
-        ]]>
-
-    </select>
-
-    <insert id="write">
+    <insert id="write" parameterType="BoardVO">
         /*
         BoardDAO.write
         글 작성
         */
-        <selectKey resultType="int" keyProperty="gNo" order="BEFORE">
+        <selectKey resultType="int" keyProperty="gNo" order="BEFORE" >
             SELECT
             IFNULL(MAX(G_NO), 0) + 1
             FROM tb_board
@@ -88,7 +74,7 @@
         ]]>
     </insert>
 
-    <insert id="writeReply">
+    <insert id="writeReply" parameterType="BoardVO">
         /*
         BoardDAO.writeReply
         게시판 답글 등록
@@ -124,6 +110,18 @@
         SET STEP = STEP + 1
         WHERE G_NO = #{gNo}
           AND STEP > #{step}
+        ]]>
+    </update>
+
+    <update id="viewCnt" parameterType="int">
+        /*
+        BoardDao.viewCnt
+        조회수 증가
+        */
+        <![CDATA[
+        UPDATE tb_board
+        SET VIEW_CNT = VIEW_CNT + 1
+        WHERE B_NO = #{bNo}
         ]]>
     </update>
 

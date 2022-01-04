@@ -41,7 +41,7 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "write", method = RequestMethod.POST)
-	public String write(BoardVO boardVO ) throws Exception {
+	public String write(BoardVO boardVO) throws Exception {
 		logger.info("write");
 		logger.info(boardVO.toString());
 		int result = boardService.write(boardVO);
@@ -61,6 +61,8 @@ public class BoardController {
 		model.addAttribute("board", boardVO);
 		return "board/write";
 	}
+
+	// 게시물 수정
 
 }
 

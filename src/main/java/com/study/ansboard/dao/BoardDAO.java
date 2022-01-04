@@ -13,13 +13,10 @@ public interface BoardDAO {
 
     int write(BoardVO boardVO);
 
-    int writeComment(CommentsVO commentVO);
-
     void replyShape(BoardVO boardVO);
 
     int writeReply(BoardVO boardVO);
 
-    List<CommentsVO> getCommentList(int bNo);
-
-    BoardVO replyInfo(BoardVO boardVO);
+    /* 조회수 증가 */
+    void viewCnt(int bNo);
 }

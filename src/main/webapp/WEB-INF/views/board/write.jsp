@@ -22,7 +22,7 @@
 
 <div class="container">
     <h2 class="mt-sm-5">게시글 작성 </h2>
-    <form action="/board/write" method="post">
+    <form action="/board/write" id="form" method="post">
         <input type="hidden" name="bNo" value="${board.bNo}">
         <input type="hidden" name="gNo" value="${board.gNo}">
         <input type="hidden" name="step" value="${board.step}">

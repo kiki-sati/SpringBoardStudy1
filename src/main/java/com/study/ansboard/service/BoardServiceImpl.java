@@ -28,8 +28,10 @@ public class BoardServiceImpl implements BoardService{
 
     @Override
     public BoardVO view(int bNo) throws Exception {
+        boardDAO.viewCnt(bNo);
         return boardDAO.view(bNo);
     }
+
 
     @Override
     public List<BoardVO> list() throws Exception {
