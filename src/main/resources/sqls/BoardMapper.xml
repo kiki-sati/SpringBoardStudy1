@@ -8,7 +8,7 @@
         BoardDAO.list
         게시판 리스트 출력
         */
-
+        <![CDATA[
         SELECT
                B_NO                                    bNo
              , TITLE                                   title
@@ -18,14 +18,17 @@
              , STEP                                    step
              , INDENT                                  indent
              , VIEW_CNT                                viewCnt
-             , DATE_FORMAT(REG_DATE, &#39;%Y/%m/%d %H:%i&#39;) regDate
+             , DATE_FORMAT(REG_DATE, '%Y/%m/%d %H:%i') regDate
         FROM tb_board
         ORDER BY G_NO DESC, STEP ASC
-
+        ]]>
     </select>
-    <!-- 게시글 내용 출력 -->
+
     <select id="view" resultType="BoardVO" parameterType="BoardVO">
-        /* BoardDAO.view */
+        /*
+        BoardDAO.view
+        게시글 내용 출력
+        */
         <![CDATA[
         SELECT
                B_NO                                    bNo
@@ -79,6 +82,7 @@
         BoardDAO.writeReply
         게시판 답글 등록
         */
+
         <![CDATA[
         INSERT INTO tb_board (
                 G_NO
@@ -100,11 +104,26 @@
         ]]>
     </insert>
 
+    <update id="update" parameterType="BoardVO">
+        /*
+        BoardDAO.update
+        게시글 수정
+        */
+        UPDATE tb_board
+        SET TITLE = #{title}
+          , CONTENT = #{content}
+          , WRITER = #{writer}
+          , EDIT_DATE = #{editDate}
+        WHERE B_NO = #{bNo}
+    </update>
+
+
     <update id="replyShape" parameterType="BoardVO">
         /*
         BoardDAO.replyShape
         답글 순서 수정 - 게시글 답글 등록시 기존 등록된 답글의 순서를 증가 시킴
         */
+
         <![CDATA[
         UPDATE tb_board
         SET STEP = STEP + 1
@@ -118,11 +137,18 @@
         BoardDao.viewCnt
         조회수 증가
         */
+
         <![CDATA[
         UPDATE tb_board
         SET VIEW_CNT = VIEW_CNT + 1
         WHERE B_NO = #{bNo}
         ]]>
     </update>
+
+    <delete id="delete" parameterType="BoardVO">
+        DELETE
+        FROM tb_board
+        WHERE B_NO = #{bNo}
+    </delete>
 
 </mapper>

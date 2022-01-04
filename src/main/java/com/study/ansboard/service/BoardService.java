@@ -14,4 +14,10 @@ public interface BoardService {
 
     BoardVO view(int bNo) throws Exception;
 
+    // 게시물 수정
+    void update(BoardVO boardVO);
+
+    // 삭제
+    void delete(BoardVO boardVO) throws Exception;
+
 }

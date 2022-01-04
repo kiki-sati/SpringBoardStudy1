@@ -62,7 +62,31 @@ public class BoardController {
 		return "board/write";
 	}
 
+	// 게시물 수정 페이지 이동
+	@RequestMapping(value = "/update", method = RequestMethod.GET)
+	public String moveUpdate(Model model, BoardVO boardVO) throws Exception {
+
+		BoardVO board = boardService.view(boardVO.getbNo());
+
+		model.addAttribute("board",board);
+		return "board/update";
+	}
+
 	// 게시물 수정
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public String update(BoardVO boardVO) throws Exception {
+		boardService.update(boardVO);
+		return "redirect:/board/view?bNo=" + boardVO.getbNo();
+	}
+
+	// 게시물 삭제
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public String delete(BoardVO boardVO) throws Exception {
+		boardService.delete(boardVO);
+
+		return "redirect:/board/list";
+	}
+
 
 }
 

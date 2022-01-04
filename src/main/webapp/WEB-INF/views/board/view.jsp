@@ -24,7 +24,7 @@
             // 글삭제
             $('.delete').click(function () {
                 if (confirm('삭제하시면 복구할수 없습니다. \n 정말로 삭제하시겠습니까??')) {
-                    location.href = "/delete?bNo=${board.bNo}";
+                    location.href = "/board/delete?bNo=${board.bNo}";
                 }
             });
 
@@ -54,6 +54,8 @@
     <input type="hidden" id="indent" value="${board.indent}">
     <input type="text" class="form-control w-50 mb-sm-1" readonly="readonly" value="${board.writer}">
     <input type="text" class="form-control w-50 mb-sm-1" readonly="readonly" value="${board.title}">
+    <input type="text" class="form-control w-50 mb-sm-1" readonly="readonly" value="${board.regDate}">
+    <input type="text" class="form-control w-50 mb-sm-1" readonly="readonly" value="${board.editDate}">
     <textarea class="form-control w-50 mb-sm-1" rows="10" readonly="readonly">${board.content}</textarea>
 
     <%-- 댓글폼--%>

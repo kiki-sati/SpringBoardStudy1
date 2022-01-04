@@ -32,6 +32,16 @@ public class BoardServiceImpl implements BoardService{
         return boardDAO.view(bNo);
     }
 
+    @Override
+    public void update(BoardVO boardVO) {
+        boardDAO.update(boardVO);
+    }
+
+    @Override
+    public void delete(BoardVO boardVO) throws Exception {
+        boardDAO.delete(boardVO);
+    }
+
 
     @Override
     public List<BoardVO> list() throws Exception {

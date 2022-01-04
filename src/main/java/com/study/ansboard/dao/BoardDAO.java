@@ -17,6 +17,12 @@ public interface BoardDAO {
 
     int writeReply(BoardVO boardVO);
 
-    /* 조회수 증가 */
+    // 조회수 증가
     void viewCnt(int bNo);
+
+    // 게시물 수정
+    void update(BoardVO boardVO);
+
+    // 삭제
+    void delete(BoardVO boardVO);
 }
