@@ -24,7 +24,7 @@ public class BoardController {
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String moveList(Model model,@RequestParam(value = "pageNum", defaultValue = "1")int pageNum) throws Exception {
+	public String moveList(Model model) throws Exception {
 		logger.info("move list");
 		List<BoardVO> list = boardService.list();
 		model.addAttribute("list",list);
@@ -36,10 +36,6 @@ public class BoardController {
 		logger.info("move view");
 		BoardVO board = boardService.view(bNo);
 		model.addAttribute("board", board);
-
-		// 댓글 출력
-		List<CommentsVO> commList = boardService.getCommentList(bNo);
-		model.addAttribute("commList", commList);
 
 		return "board/view";
 	}
@@ -59,49 +55,12 @@ public class BoardController {
 		return "board/writeReply";
 	}
 
-
 	@RequestMapping(value="/write", method=RequestMethod.GET)
 	public String moveWrite(Model model, BoardVO boardVO) {
 		logger.info("move write");
 		model.addAttribute("board", boardVO);
 		return "board/write";
 	}
-
-	// 댓글 등록
-	@RequestMapping("/writeComment")
-	@ResponseBody
-	public int writeComment(@ModelAttribute CommentsVO commentVO) {
-		int result = 0;
-
-		System.out.println("commentVO >> " + commentVO.getCmContent());
-		try {
-			result = boardService.writeComment(commentVO);
-		} catch (Exception e) {
-			e.printStackTrace();
-			result = -1;
-		}
-		return result;
-	}
-
-	// 댓글 리스트 ajax
-	@RequestMapping(value = "/selectCommList", produces = "application/json; charset=utf-8")
-	@ResponseBody
-	public String selectReplyList(int postIdx, Model model) throws Exception {
-
-		// ajax에서 에러를 처리해줌으로throws Exception
-		// try catch를 안해줘도됨(다른방법도 있음)
-		List<CommentsVO> commList = boardService.getCommentList(postIdx);
-
-		model.addAttribute("commCount", commList.size());
-
-		// JSON으로 담아도 되지만 편한 방법인 GSON으로 사용
-
-		// yyyy-MM-dd hh:mm:ss
-		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd hh:mm").create();
-
-		return gson.toJson(commList);
-	}
-
 
 }
 

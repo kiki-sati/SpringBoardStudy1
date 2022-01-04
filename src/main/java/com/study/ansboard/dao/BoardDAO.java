@@ -7,8 +7,6 @@ import java.util.List;
 
 public interface BoardDAO {
 
-
-
     List<BoardVO> list();
 
     BoardVO view(int bNo);
@@ -22,4 +20,6 @@ public interface BoardDAO {
     int writeReply(BoardVO boardVO);
 
     List<CommentsVO> getCommentList(int bNo);
+
+    BoardVO replyInfo(BoardVO boardVO);
 }

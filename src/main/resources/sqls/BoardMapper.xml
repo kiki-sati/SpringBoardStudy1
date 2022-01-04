@@ -3,120 +3,128 @@
 
 <mapper namespace="com.study.ansboard.sqls.BoardMapper">
 
+    <!-- 게시판 리스트 출력 -->
     <select id="list" resultType="BoardVO">
+        /* BoardDAO.list */
         <![CDATA[
         SELECT
-               B_NO     bNo
-             , TITLE    title
-             , CONTENT  content
-             , WRITER   writer
-             , G_NO     gNo
-             , STEP     step
-             , INDENT   indent
-             , VIEW_CNT viewCnt
+               B_NO                                    bNo
+             , TITLE                                   title
+             , CONTENT                                 content
+             , WRITER                                  writer
+             , G_NO                                    gNo
+             , STEP                                    step
+             , INDENT                                  indent
+             , VIEW_CNT                                viewCnt
              , DATE_FORMAT(REG_DATE, '%Y/%m/%d %H:%i') regDate
         FROM tb_board
         ORDER BY G_NO DESC, STEP ASC
         ]]>
     </select>
 
+    <!-- 게시글 내용 출력 -->
     <select id="view" resultType="BoardVO">
+        /* BoardDAO.view */
         <![CDATA[
         SELECT
-               B_NO     bNo
-             , WRITER   writer
-             , TITLE    title
-             , CONTENT  content
-             , G_NO     gNo
-             , STEP     step
-             , INDENT   indent
-             , VIEW_CNT viewCnt
+               B_NO                                    bNo
+             , WRITER                                  writer
+             , TITLE                                   title
+             , CONTENT                                 content
+             , G_NO                                    gNo
+             , STEP                                    step
+             , INDENT                                  indent
+             , VIEW_CNT                                viewCnt
              , DATE_FORMAT(REG_DATE, '%Y/%m/%d %H:%i') regDate
         FROM tb_board
         WHERE B_NO = #{bNo}
         ]]>
     </select>
 
-    <!-- 댓글출력 -->
-    <select id="commentList" resultType="CommentVO">
-		<![CDATA[
-        SELECT CM_IDX                                 cmIdx
-             , CM_CONTENT                             cmContent
-             , DATE_FORMAT(CM_DATE, '%Y/%m/%d %H:%i') cmDate
-             , CM_WRITER                              cmWriter
-        FROM t_comments
-        WHERE B_NO = #{bNo}
-        ORDER BY CM_DATE DESC
+    <!-- 답글 정보 조회 -->
+    <select id="replyInfo" resultType="BoardVO">
+     /* BoardDAO.replyInfo */
+        <![CDATA[
+        SELECT
+             B_NO
+           , G_NO
+           , STEP
+           , INDENT
+        FROM tb_board
+        WHERE B_NO = #{boardParentSeq}
         ]]>
+
     </select>
 
-    <!-- 댓글 입력 -->
-    <insert id="insertComment" parameterType="CommentVO">
-        /* BoardDAO.insertComment */
-	 <![CDATA[
-        INSERT INTO t_comments ( CM_CONTENT
-                               , CM_DATE
-                               , CM_WRITER
-                               , POST_IDX)
-        VALUES ( #{cmContent}
-               , NOW()
-               , #{cmWriter}
-               , #{postIdx})
-        ]]>
-    </insert>
-
     <insert id="write">
+        /*
+        BoardDAO.write
+        글 작성
+        */
+        <selectKey resultType="int" keyProperty="gNo" order="BEFORE">
+            SELECT
+            IFNULL(MAX(G_NO), 0) + 1
+            FROM tb_board
+        </selectKey>
+
         <![CDATA[
         INSERT INTO tb_board (
-               B_NO
+               G_NO
+             , STEP
+             , INDENT
              , WRITER
              , TITLE
              , CONTENT
-             , G_NO
-             , STEP
-             , INDENT
              , REG_DATE
         ) VALUE (
-               #{bNo}
+               #{gNo}
+             , 0
+             , 0
              , #{writer}
              , #{title}
              , #{content}
-             , #{bNo}
-             , 0
-             , 0
              , NOW()
         )
         ]]>
     </insert>
 
-    <update id="replyShape">
-        <![CDATA[
-        UPDATE tb_board
-            SET STEP = STEP +1
-        WHERE G_NO = #{gNo} AND STEP > #{step}
-        ]]>
-    </update>
-
     <insert id="writeReply">
+        /*
+        BoardDAO.writeReply
+        게시판 답글 등록
+        */
         <![CDATA[
         INSERT INTO tb_board (
-                  TITLE
-                , CONTENT
-                , WRITER
-                , G_NO
-                , STEP
-                , INDENT
-                , REG_DATE
+                G_NO
+              , STEP
+              , INDENT
+              , TITLE
+              , CONTENT
+              , WRITER
+              , REG_DATE
         ) VALUE (
-                  #{title}
-                , #{content}
-                , #{writer}
-                , #{gNo}
-                , #{step}+1
-                , #{indent}+1
-                , NOW()
-        )
+                #{gNo}
+              , #{step}+1
+              , #{indent}+1
+              , #{title}
+              , #{content}
+              , #{writer}
+              , NOW()
+            )
         ]]>
     </insert>
+
+    <update id="replyShape" parameterType="BoardVO">
+        /*
+        BoardDAO.replyShape
+        답글 순서 수정 - 게시글 답글 등록시 기존 등록된 답글의 순서를 증가 시킴
+        */
+        <![CDATA[
+        UPDATE tb_board
+        SET STEP = STEP + 1
+        WHERE G_NO = #{gNo}
+          AND STEP > #{step}
+        ]]>
+    </update>
 
 </mapper>

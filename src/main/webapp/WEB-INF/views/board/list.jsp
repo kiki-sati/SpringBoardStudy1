@@ -46,8 +46,8 @@
                 <td>${list.bNo}</td>
                 <td class="move text-left" data="view" style="cursor: pointer;">
                     <c:if test="${list.indent > 0 }">
-                        <c:set var="width" value="${list.indent*10}"></c:set>
-                        <img src="/resources/image/blank.png" width="${width}px">
+                        <c:set var="width" value="${list.indent * 10}"> </c:set>
+                        <img alt="" src="/img/abc.png" width="${width}px">
                         <span>&gt;</span>
                     </c:if>
                         ${list.title}</td>

@@ -1,5 +1,9 @@
 package com.study.ansboard.vo;
 
+import lombok.*;
+
+@NoArgsConstructor
+@ToString
 public class BoardVO {
     private int bNo;
     private String title;
@@ -11,6 +15,7 @@ public class BoardVO {
     private int viewCnt;
     private String regDate;
     private String editDate;
+    private String boardParentSeq;
 
     public int getbNo() {
         return bNo;
@@ -90,6 +95,14 @@ public class BoardVO {
 
     public void setEditDate(String editDate) {
         this.editDate = editDate;
+    }
+
+    public String getBoardParentSeq() {
+        return boardParentSeq;
+    }
+
+    public void setBoardParentSeq(String boardParentSeq) {
+        this.boardParentSeq = boardParentSeq;
     }
 
     @Override

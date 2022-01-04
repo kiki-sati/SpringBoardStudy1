@@ -14,8 +14,10 @@ public class BoardServiceImpl implements BoardService{
     @Autowired
     private BoardDAO boardDAO;
 
+    // 게시판 글 작성
     @Override
     public int write(BoardVO boardVO) throws Exception {
+
         if (boardVO.getgNo() == 0) {
             return boardDAO.write(boardVO);
         } else {
@@ -25,28 +27,14 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
-    public int writeComment(CommentsVO commentVO) throws Exception {
-        return BoardDAO.writeComment(commentVO);
-    }
-
-    @Override
     public BoardVO view(int bNo) throws Exception {
         return boardDAO.view(bNo);
-    }
-
-    @Override
-    public List<CommentsVO> getCommentList(int bNo) {
-        return boardDAO.getCommentList(bNo);
     }
 
     @Override
     public List<BoardVO> list() throws Exception {
         return boardDAO.list();
     }
-
-
-
-
 
 
 }
