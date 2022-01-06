@@ -1,9 +1,8 @@
-package com.study.ansboard.vo;
+package com.study.ansboard.board.vo;
 
-import lombok.*;
+import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
-@ToString
 public class BoardVO {
     private int bNo;
     private String title;
@@ -118,6 +117,7 @@ public class BoardVO {
                 ", viewCnt=" + viewCnt +
                 ", regDate='" + regDate + '\'' +
                 ", editDate='" + editDate + '\'' +
+                ", boardParentSeq='" + boardParentSeq + '\'' +
                 '}';
     }
 }

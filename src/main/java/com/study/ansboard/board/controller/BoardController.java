@@ -1,9 +1,6 @@
-package com.study.ansboard.controller;
+package com.study.ansboard.board.controller;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.study.ansboard.vo.BoardVO;
-import com.study.ansboard.vo.CommentsVO;
+import com.study.ansboard.board.vo.BoardVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import com.study.ansboard.service.BoardService;
+import com.study.ansboard.board.service.BoardService;
 
 import java.util.List;
 
@@ -77,6 +74,7 @@ public class BoardController {
 	public String update(BoardVO boardVO) throws Exception {
 		boardService.update(boardVO);
 		return "redirect:/board/view?bNo=" + boardVO.getbNo();
+
 	}
 
 	// 게시물 삭제

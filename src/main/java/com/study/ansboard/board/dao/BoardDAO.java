@@ -1,7 +1,6 @@
-package com.study.ansboard.dao;
+package com.study.ansboard.board.dao;
 
-import com.study.ansboard.vo.BoardVO;
-import com.study.ansboard.vo.CommentsVO;
+import com.study.ansboard.board.vo.BoardVO;
 
 import java.util.List;
 
@@ -25,4 +24,5 @@ public interface BoardDAO {
 
     // 삭제
     void delete(BoardVO boardVO);
+
 }

@@ -1,6 +1,6 @@
-package com.study.ansboard.dao;
+package com.study.ansboard.board.dao;
 
-import com.study.ansboard.vo.BoardVO;
+import com.study.ansboard.board.vo.BoardVO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

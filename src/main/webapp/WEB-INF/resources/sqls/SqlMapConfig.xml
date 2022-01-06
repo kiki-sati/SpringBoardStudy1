@@ -5,8 +5,8 @@
 	
 	<!-- 변수 설정 -->
 	<typeAliases>
-		<typeAlias type="com.study.ansboard.vo.BoardVO" alias="BoardVO"/>
-		<typeAlias type="com.study.ansboard.vo.CommentsVO" alias="CommentsVO"/>
+		<typeAlias type="com.study.ansboard.board.vo.BoardVO" alias="BoardVO"/>
+		<typeAlias type="com.study.ansboard.board.vo.CommentsVO" alias="CommentsVO"/>
 	</typeAliases>
 	
 </configuration>

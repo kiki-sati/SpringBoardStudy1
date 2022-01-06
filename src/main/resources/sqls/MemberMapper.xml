@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.study.ansboard.sqls.MemberMapper">
+
+
+    <insert id="memberJoin" parameterType="MemberVO">
+     <![CDATA[
+        INSERT
+        INTO
+            tb_member (
+                        MEM_ID
+                      , MEM_NAME
+                      , PHONE_NUM
+                      , MEM_EMAIL
+                      , MEM_PW
+        ) VALUES (
+                  'asd123123'
+                 ,'자바찐천재'
+                 , '01044441111'
+                 , 'asd@naver.com'
+                 , '1111'
+            )
+
+        ]]>
+    </insert>
+
+</mapper>

@@ -1,4 +1,4 @@
-package com.study.ansboard.vo;
+package com.study.ansboard.board.vo;
 
 import lombok.Getter;
 import lombok.Setter;

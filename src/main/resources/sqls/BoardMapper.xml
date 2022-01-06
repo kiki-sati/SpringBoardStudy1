@@ -65,7 +65,7 @@
              , TITLE
              , CONTENT
              , REG_DATE
-        ) VALUE (
+        ) VALUES (
                #{gNo}
              , 0
              , 0
@@ -92,7 +92,7 @@
               , CONTENT
               , WRITER
               , REG_DATE
-        ) VALUE (
+        ) VALUES (
                 #{gNo}
               , #{step}+1
               , #{indent}+1

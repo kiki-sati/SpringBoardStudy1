@@ -1,8 +1,7 @@
-package com.study.ansboard.service;
+package com.study.ansboard.board.service;
 
-import com.study.ansboard.dao.BoardDAO;
-import com.study.ansboard.vo.BoardVO;
-import com.study.ansboard.vo.CommentsVO;
+import com.study.ansboard.board.dao.BoardDAO;
+import com.study.ansboard.board.vo.BoardVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
