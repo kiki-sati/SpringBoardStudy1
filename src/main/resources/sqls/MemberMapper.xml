@@ -3,23 +3,36 @@
 
 <mapper namespace="com.study.ansboard.sqls.MemberMapper">
 
+    <select id="memberLogin" parameterType="MemberVO">
+        /* MemberDAO.memberLogin */
+     <![CDATA[
+        SELECT
+           MEM_ID memId
+         , MEM_PW memPw
+        FROM tb_member
+        WHERE MEM_ID = #{memId}
+          AND MEM_PW = #{memPw}
+        ]]>
+    </select>
 
     <insert id="memberJoin" parameterType="MemberVO">
+        /* MemberDAO.member*/
      <![CDATA[
         INSERT
         INTO
             tb_member (
                         MEM_ID
+                      , MEM_PW
                       , MEM_NAME
                       , PHONE_NUM
                       , MEM_EMAIL
-                      , MEM_PW
+
         ) VALUES (
-                  'asd123123'
-                 ,'자바찐천재'
-                 , '01044441111'
-                 , 'asd@naver.com'
-                 , '1111'
+                  #{memId}
+                 , #{memPw}
+                 , #{memName}
+                 , #{phoneNum}
+                 , #{memEmail}
             )
 
         ]]>
