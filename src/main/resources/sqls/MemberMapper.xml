@@ -16,7 +16,7 @@
     </select>
 
     <insert id="memberJoin" parameterType="MemberVO">
-        /* MemberDAO.member*/
+        /* MemberDAO.memberJoin*/
      <![CDATA[
         INSERT
         INTO
