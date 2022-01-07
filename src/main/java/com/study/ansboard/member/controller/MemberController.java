@@ -42,7 +42,7 @@ public class MemberController {
 	}
 
 
-
+	// 로그인
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(MemberVO memberVO, HttpServletRequest req, RedirectAttributes rttr) throws Exception{
 		logger.info("post login");
@@ -60,6 +60,7 @@ public class MemberController {
 		return "redirect:/board/list";
 	}
 
+	// 로그아웃
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session) throws Exception{
 
