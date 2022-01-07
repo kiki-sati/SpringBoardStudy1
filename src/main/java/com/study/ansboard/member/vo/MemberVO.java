@@ -5,8 +5,9 @@ public class MemberVO {
     private String memId;
     private String memPw;
     private String memName;
-    private String phoneNumber;
+    private String phoneNum;
     private String memEmail;
+    private String memRegDate;
 
     public int getMemNo() {
         return memNo;
@@ -40,12 +41,12 @@ public class MemberVO {
         this.memName = memName;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getPhoneNum() {
+        return phoneNum;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum;
     }
 
     public String getMemEmail() {
@@ -54,6 +55,14 @@ public class MemberVO {
 
     public void setMemEmail(String memEmail) {
         this.memEmail = memEmail;
+    }
+
+    public String getMemRegDate() {
+        return memRegDate;
+    }
+
+    public void setMemRegDate(String memRegDate) {
+        this.memRegDate = memRegDate;
     }
 }
 

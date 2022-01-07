@@ -16,12 +16,13 @@ public class MemberDAOImpl implements MemberDAO {
     // 회원가입
     @Override
     public void memberJoin(MemberVO memberVO) throws Exception {
+        sqlSession.insert(namespace+ ".memberJoin", memberVO);
 
     }
 
     // 로그인
     @Override
     public MemberVO memberLogin(MemberVO memberVO) throws Exception {
-        return sqlSession.selectOne(".memberLogin", memberVO);
+        return sqlSession.selectOne(namespace+".memberLogin", memberVO);
     }
 }

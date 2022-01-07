@@ -3,7 +3,7 @@
 
 <mapper namespace="com.study.ansboard.sqls.MemberMapper">
 
-    <select id="memberLogin" resultType="MemberVO" parameterType="MemberVO">
+    <select id="memberLogin" parameterType="MemberVO">
         /* MemberDAO.memberLogin */
      <![CDATA[
         SELECT
@@ -15,7 +15,7 @@
         ]]>
     </select>
 
-    <insert id="memberJoin" parameterType="MemberVO" >
+    <insert id="memberJoin" parameterType="MemberVO">
         /* MemberDAO.memberJoin*/
      <![CDATA[
         INSERT
