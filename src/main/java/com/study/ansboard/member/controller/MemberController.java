@@ -64,9 +64,10 @@ public class MemberController {
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session) throws Exception{
 
+		// 세션  초기화
 		session.invalidate();
 
-		return "redirect:/member/login";
+		return "redirect:/";
 	}
 
 }
