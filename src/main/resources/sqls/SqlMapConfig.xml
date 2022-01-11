@@ -8,6 +8,7 @@
 		<typeAlias type="com.study.ansboard.board.vo.BoardVO" alias="BoardVO"/>
 		<typeAlias type="com.study.ansboard.board.vo.CommentsVO" alias="CommentsVO"/>
 		<typeAlias type="com.study.ansboard.member.vo.MemberVO" alias="MemberVO"/>
+		<typeAlias type="com.study.ansboard.member.vo.LoginDTO" alias="LoginDTO"/>
 	</typeAliases>
 
 </configuration>

@@ -5,9 +5,8 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <%@ include file="/WEB-INF/views/layout/header.jsp"%>
     <title>게시판 리스트</title>
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
 
     <script>
         // 게시판 이동
@@ -39,8 +38,9 @@
         <input readonly="readonly" type="text" class="form-control w-50 mb-sm-1" name="regDate" value="${board.editDate} ">
         <input type="text" class="form-control w-50 mb-sm-1" name="title" placeholder="제목">
         <textarea rows="10" class="form-control w-50 mb-sm-1" name="content"></textarea>
-        <button type="button" id="submit" class="btn btn-primary" style="margin-left: 45%;">등록</button>
+
     </form>
+    <button type="button" id="submit" class="btn btn-primary" style="margin-left: 45%;">등록</button>
     <button type="button" class="btn btn-primary list">목록</button>
 </div>
 </body>

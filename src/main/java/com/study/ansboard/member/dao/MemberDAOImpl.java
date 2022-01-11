@@ -1,5 +1,6 @@
 package com.study.ansboard.member.dao;
 
+import com.study.ansboard.member.vo.LoginDTO;
 import com.study.ansboard.member.vo.MemberVO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,8 @@ public class MemberDAOImpl implements MemberDAO {
 
     // 로그인
     @Override
-    public MemberVO memberLogin(MemberVO memberVO) throws Exception {
-        return sqlSession.selectOne(namespace+".memberLogin", memberVO);
+    public MemberVO memberLogin(LoginDTO loginDTO) throws Exception {
+        return sqlSession.selectOne(namespace+".memberLogin", loginDTO);
     }
 
     @Override

@@ -9,9 +9,9 @@
         SELECT
            MEM_ID memId
          , MEM_PW memPw
+         , MEM_NAME memName
         FROM tb_member
         WHERE MEM_ID = #{memId}
-          AND MEM_PW = #{memPw}
         ]]>
     </select>
 

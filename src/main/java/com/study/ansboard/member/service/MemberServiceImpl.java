@@ -1,6 +1,7 @@
 package com.study.ansboard.member.service;
 
 import com.study.ansboard.member.dao.MemberDAO;
+import com.study.ansboard.member.vo.LoginDTO;
 import com.study.ansboard.member.vo.MemberVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,8 +19,8 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public MemberVO memberLogin(MemberVO memberVO) throws Exception {
-        return memberDAO.memberLogin(memberVO);
+    public MemberVO memberLogin(LoginDTO loginDTO) throws Exception {
+        return memberDAO.memberLogin(loginDTO);
     }
 
     @Override

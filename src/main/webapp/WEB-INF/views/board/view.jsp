@@ -5,9 +5,8 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <%@ include file="/WEB-INF/views/layout/header.jsp"%>
     <title>게시판 내용</title>
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
     <script>
 
         $(document).ready(function () {

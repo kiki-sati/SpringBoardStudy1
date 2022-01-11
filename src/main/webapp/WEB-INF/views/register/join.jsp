@@ -3,8 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <%@ include file="/WEB-INF/views/layout/header.jsp"%>
     <title>회원가입</title>
 </head>
 
@@ -17,7 +16,6 @@
             <input class="form-control" type="text" id="memId" name="memId" maxlength="28"/>
             <div id="idCheck1">사용 가능한 아이디 입니다. </div>
             <div id="idCheck2" style="color:#d92742"> 이미 사용중인 아이디 입니다.</div>
-
             <div class="form-group has-feedback">
                 <label class="control-label" for="memPw">비밀번호</label>
                 <input class="form-control" type="password" id="memPw" name="memPw" maxlength="15"/>
@@ -58,16 +56,10 @@
 
 <script type="text/javascript">
 
+    // 아이디 확인 숨기기
     $(document).ready(function () {
-
-
-
         $('#idCheck1').hide();
         $('#idCheck2').hide();
-
-        $("#cancel").on("click", function () {
-            location.href = "/";
-        })
 
         //아이디 중복검사
         $('#memId').on('blur', function (event) {
@@ -182,6 +174,12 @@
                 return false;
             }
         });
+
+        // 취소 이동
+        $("#cancel").on("click", function () {
+            location.href = "/member/login";
+        })
+
     })
 
 

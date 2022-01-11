@@ -5,9 +5,8 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <%@ include file="/WEB-INF/views/layout/header.jsp"%>
     <title>게시판 리스트</title>
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
 
     <script>
         // 게시판 이동
@@ -28,7 +27,7 @@
         <input type="hidden" name="step" value="${board.step}">
         <input type="hidden" name="indent" value="${board.indent}">
         <input type="hidden" id="boardParentSeq" name="boardParentSeq" value="${bNo}"/> <!-- 부모 게시글 번호 -->
-        <input type="text" class="form-control w-50 mb-sm-1" name="writer" placeholder="작성자">
+        <input type="text" class="form-control w-50 mb-sm-1" readonly name="writer" value="${login.memName}">
         <input type="text" class="form-control w-50 mb-sm-1" name="title" placeholder="제목">
         <textarea rows="10" class="form-control w-50 mb-sm-1" name="content"></textarea>
         <button type="submit" class="btn btn-primary" style="margin-left: 45%;">등록</button>
