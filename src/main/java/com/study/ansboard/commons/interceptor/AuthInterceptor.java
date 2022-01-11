@@ -11,17 +11,6 @@ import javax.servlet.http.HttpSession;
 public class AuthInterceptor extends HandlerInterceptorAdapter {
     private static final Logger logger = LoggerFactory.getLogger(AuthInterceptor.class);
 
-    @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        HttpSession httpSession = request.getSession();
-        if (httpSession.getAttribute("login") == null) {
-            logger.info("current user is not logged");
-            saveDestination(request);
-            response.sendRedirect("/board/list");
-            return false;
-        }
-        return true;
-    }
 
     //사용자가 원하던 페이지가 무엇이었는지 보관했다가, 로그인 성공 후 해당 페이지로 이동 시켜주기
     // 페이지 요청 정보 저장
@@ -39,6 +28,17 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
         }
     }
 
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        HttpSession httpSession = request.getSession();
+        if (httpSession.getAttribute("login") == null) {
+            logger.info("current user is not logged");
+            saveDestination(request);
+            response.sendRedirect("/member/login");
+            return false;
+        }
+        return true;
+    }
 
 
 }

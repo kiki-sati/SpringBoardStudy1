@@ -45,7 +45,7 @@ public class MemberController {
         memberService.memberJoin(memberVO);
         redirectAttributes.addFlashAttribute("msg", "REGISTERED");
 
-        return "redirect:/board/list";
+        return "redirect:/member/loginPost";
     }
 
     // 아이디 중복 검사
@@ -74,8 +74,9 @@ public class MemberController {
 
 
     // 로그인 처리
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public void login(LoginDTO loginDTO, HttpSession httpSession, Model model) throws Exception {
+    @RequestMapping(value = "/loginPost", method = RequestMethod.POST)
+    public void loginPOST(LoginDTO loginDTO, HttpSession httpSession, Model model) throws Exception {
+
         MemberVO memberVO = memberService.memberLogin(loginDTO);
 
         if (memberVO == null || !BCrypt.checkpw(loginDTO.getMemPw(), memberVO.getMemPw())) {

@@ -27,9 +27,10 @@
     <beans:bean id="authInterceptor" class="com.study.ansboard.commons.interceptor.AuthInterceptor"/>
     <interceptors>
         <interceptor>
-            <mapping path="/member/login"/>
+            <mapping path="/member/loginPost"/>
             <beans:ref bean="loginInterceptor"/>
         </interceptor>
+
         <interceptor>
             <mapping path="/board/list"/>
             <mapping path="/board/view"/>

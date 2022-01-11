@@ -4,7 +4,7 @@
 <html>
 
 <head>
-    <%@ include file="/WEB-INF/views/layout/header.jsp"%>
+    <%@ include file="/WEB-INF/views/layout/header.jsp" %>
     <title>Login</title>
 </head>
 <a href="/board/list">게시판</a><br/>
@@ -20,9 +20,17 @@
         })
 
     })
+
+    var msg = "${msg}";
+    if (msg === "REGISTERED") {
+        alert("회원가입이 완료되었습니다. 로그인해주세요~");
+    } else if (msg == "FAILURE") {
+        alert("아이디와 비밀번호를 확인해주세요.");
+    }
+
 </script>
 <body>
-<form action="/member/login" method="post" name="form">
+<form action="/member/loginPost" method="post" name="form">
     <c:if test="${member == null}">
         <div>
             <label for="memId"></label>
@@ -37,15 +45,8 @@
             <button id="join" type="button">회원가입</button>
         </div>
     </c:if>
-    <c:if test="${member != null }">
-        <div>
-            <p>${member.memId}님 환영 합니다.</p>
-            <button id="logoutBtn" type="button">로그아웃</button>
-        </div>
-    </c:if>
-    <c:if test="${msg == false}">
-        <p style="color: red;">로그인 실패! 아이디와 비밀번호 확인해주세요.</p>
-    </c:if>
+
+
 </form>
 </body>
 </html>

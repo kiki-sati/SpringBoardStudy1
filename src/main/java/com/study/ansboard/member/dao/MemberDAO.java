@@ -13,5 +13,5 @@ public interface MemberDAO {
     MemberVO memberLogin(LoginDTO loginDTO) throws Exception;
 
     // 아이디 중복 검사
-    public int memIdCheck(String memId);
+    int memIdCheck(String memId);
 }
