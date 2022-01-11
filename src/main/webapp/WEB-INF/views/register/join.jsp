@@ -52,6 +52,7 @@
                 <button class="btn btn-success" type="submit" id="submit">회원가입</button>
                 <button class=" btn btn-danger" type="button" id="cancel">취소</button>
             </div>
+        </div>
     </form>
 </section>
 
