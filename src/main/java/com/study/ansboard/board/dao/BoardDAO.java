@@ -25,4 +25,5 @@ public interface BoardDAO {
     // 삭제
     void delete(BoardVO boardVO);
 
+
 }

@@ -66,4 +66,5 @@ public class BoardDAOImpl implements BoardDAO{
         sqlSession.delete(namespace+".delete", boardVO);
     }
 
+
 }

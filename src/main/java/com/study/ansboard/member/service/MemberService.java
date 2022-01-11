@@ -9,5 +9,6 @@ public interface MemberService {
     // 로그인
     MemberVO memberLogin(MemberVO memberVO) throws Exception;
 
-
+    // 아이디 중복 검사
+    int memIdCheck(String memId);
 }

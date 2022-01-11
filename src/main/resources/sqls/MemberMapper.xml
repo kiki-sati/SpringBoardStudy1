@@ -15,6 +15,18 @@
         ]]>
     </select>
 
+    <select id="memIdCheck" resultType="int" parameterType="String">
+        /* MemberDAO.memIdCheck */
+     <![CDATA[
+        SELECT
+            COUNT(MEM_ID)
+        FROM tb_member
+        WHERE MEM_ID = #{memId}
+        ]]>
+    </select>
+
+
+
     <insert id="memberJoin" parameterType="MemberVO" >
         /* MemberDAO.memberJoin*/
      <![CDATA[

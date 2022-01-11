@@ -21,4 +21,11 @@ public class MemberServiceImpl implements MemberService {
     public MemberVO memberLogin(MemberVO memberVO) throws Exception {
         return memberDAO.memberLogin(memberVO);
     }
+
+    @Override
+    public int memIdCheck(String memId) {
+        return memberDAO.memIdCheck(memId);
+    }
+
+
 }
