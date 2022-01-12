@@ -23,8 +23,8 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
             query = "?" + query;
         }
         if (request.getMethod().equals("GET")) {
-            logger.info("detination : " + (uri + query));
-            request.getSession().setAttribute("detination", uri + query);
+            logger.info("returnUrl : " + (uri + query));
+            request.getSession().setAttribute("returnUrl", uri + query);
         }
     }
 

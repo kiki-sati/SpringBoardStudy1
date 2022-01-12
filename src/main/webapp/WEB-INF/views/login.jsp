@@ -9,26 +9,7 @@
 </head>
 <a href="/board/list">게시판</a><br/>
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#logoutBtn").on("click", function () {
-            location.href = "/member/logout";
-        })
 
-        $("#join").on("click", function () {
-            location.href = "/member/join";
-        })
-
-    })
-
-    var msg = "${msg}";
-    if (msg === "REGISTERED") {
-        alert("회원가입이 완료되었습니다. 로그인해주세요~");
-    } else if (msg == "FAILURE") {
-        alert("아이디와 비밀번호를 확인해주세요.");
-    }
-
-</script>
 <body>
 <form action="/member/loginPost" method="post" name="form">
     <c:if test="${member == null}">
@@ -45,8 +26,25 @@
             <button id="join" type="button">회원가입</button>
         </div>
     </c:if>
-
-
 </form>
+
 </body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#logoutBtn").on("click", function () {
+            location.href = "/member/logout";
+        })
+
+        $("#join").on("click", function () {
+            location.href = "/member/join";
+        })
+
+    })
+
+    var msg = "${msg}";
+    if (msg === "REGISTERED") {
+        alert("회원가입이 완료되었습니다. 로그인해주세요~^^*");
+    }
+
+</script>
 </html>

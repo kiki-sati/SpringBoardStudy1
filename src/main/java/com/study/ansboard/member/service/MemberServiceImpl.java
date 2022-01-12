@@ -30,15 +30,15 @@ public class MemberServiceImpl implements MemberService {
         return memberDAO.memIdCheck(memId);
     }
 
-    @Override
-    public void keepLogin(String memId, String sessionId, Date sessionLimit) throws Exception {
-        memberDAO.keepLogin(memId, sessionId, sessionLimit);
-
-    }
 
     @Override
     public MemberVO checkLoginBefore(String value) throws Exception {
         return memberDAO.checkUserWithSessionKey(value);
+    }
+
+    @Override
+    public int insertLoginInfo(MemberVO memberVO) throws Exception {
+        return memberDAO.insertLoginInfo(memberVO);
     }
 
 

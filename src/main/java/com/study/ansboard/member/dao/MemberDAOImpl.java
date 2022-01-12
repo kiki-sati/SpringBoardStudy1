@@ -36,20 +36,15 @@ public class MemberDAOImpl implements MemberDAO {
         return sqlSession.selectOne(namespace + ".memIdCheck", memId);
     }
 
-    @Override
-    public void keepLogin(String memId, String sessionId, Date sessionLimit) throws Exception {
-        Map<String, Object> paramMap = new HashMap<String, Object>();
-        paramMap.put("memId", memId);
-        paramMap.put("sessionId", sessionId);
-        paramMap.put("sessionLimit", sessionLimit);
-        sqlSession.update(namespace + ".keepLogin", paramMap);
-
-
-    }
 
     @Override
     public MemberVO checkUserWithSessionKey(String value) throws Exception {
         return sqlSession.selectOne(namespace + ".checkUserWithSessionKey", value);
 
+    }
+
+    @Override
+    public int insertLoginInfo(MemberVO memberVO) throws Exception {
+        return sqlSession.insert(namespace + ".insertLoginInfo", memberVO);
     }
 }

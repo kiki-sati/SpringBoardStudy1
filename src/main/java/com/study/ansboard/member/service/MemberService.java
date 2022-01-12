@@ -15,8 +15,9 @@ public interface MemberService {
     // 아이디 중복 검사
     int memIdCheck(String memId);
 
-    void keepLogin(String memId, String sessionId, Date sessionLimit) throws Exception;
-
     MemberVO checkLoginBefore(String value) throws Exception;
+
+    // 로그인 이력 입력
+    int insertLoginInfo(MemberVO memberVO) throws Exception;
 
 }

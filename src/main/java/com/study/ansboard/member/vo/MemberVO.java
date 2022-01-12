@@ -8,6 +8,8 @@ public class MemberVO {
     private String phoneNum;
     private String memEmail;
     private String memRegDate;
+    private String loginIp;
+
 
     public int getMemNo() {
         return memNo;
@@ -63,6 +65,14 @@ public class MemberVO {
 
     public void setMemRegDate(String memRegDate) {
         this.memRegDate = memRegDate;
+    }
+
+    public String getLoginIp() {
+        return loginIp;
+    }
+
+    public void setLoginIp(String loginIp) {
+        this.loginIp = loginIp;
     }
 }
 

@@ -13,4 +13,6 @@ public class CommentsVO {
     private String cmDate;
     private String cmWriter;
     private int bNo;
+
+
 }

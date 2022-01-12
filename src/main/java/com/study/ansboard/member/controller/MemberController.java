@@ -50,7 +50,7 @@ public class MemberController {
         memberService.memberJoin(memberVO);
         redirectAttributes.addFlashAttribute("msg", "REGISTERED");
 
-        return "redirect:/member/loginPost";
+        return "redirect:/member/login";
     }
 
     // 아이디 중복 검사
@@ -80,22 +80,21 @@ public class MemberController {
 
     // 로그인 처리
     @RequestMapping(value = "/loginPost", method = RequestMethod.POST)
-    public void loginPOST(LoginDTO loginDTO, HttpSession httpSession, Model model) throws Exception {
+    public void loginPOST(LoginDTO loginDTO, HttpSession httpSession, Model model, HttpServletRequest request, HttpServletResponse response ) throws Exception {
 
         MemberVO memberVO = memberService.memberLogin(loginDTO);
+
 
         if (memberVO == null || !BCrypt.checkpw(loginDTO.getMemPw(), memberVO.getMemPw())) {
             return;
         }
 
-        model.addAttribute("member", memberVO);
+        logger.info("로그인 성공!");
 
-        // 로그인 유지를 선택할 경우
-        if (loginDTO.isUseCookie()) {
-            int amount = 60 * 60 * 24 * 7; // 7일
-            Date sessionLimit = new Date(System.currentTimeMillis() + (1000 * amount)); // 로그인 유지기간 설정
-            memberService.keepLogin(memberVO.getMemId(), httpSession.getId(), sessionLimit);
-        }
+        memberVO.setLoginIp(request.getRemoteAddr());
+        memberService.insertLoginInfo(memberVO);
+
+        model.addAttribute("member", memberVO);
     }
 
     // 로그아웃 처리
@@ -106,13 +105,6 @@ public class MemberController {
             MemberVO memberVO = (MemberVO) object;
             httpSession.removeAttribute("login");
             httpSession.invalidate();
-            Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
-            if (loginCookie != null) {
-                loginCookie.setPath("/");
-                loginCookie.setMaxAge(0);
-                response.addCookie(loginCookie);
-                memberService.keepLogin(memberVO.getMemId(), "none", new Date(System.currentTimeMillis()));
-            }
         }
         return "/member/logout";
 

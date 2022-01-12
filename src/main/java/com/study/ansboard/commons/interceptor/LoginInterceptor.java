@@ -30,6 +30,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         HttpSession httpSession = request.getSession();
         ModelMap modelMap = modelAndView.getModelMap();
         Object memberVO = modelMap.get("member");
+        logger.info("post uyuhyuhyuhyuhyuhyuhyuhyuy");
 
         if (memberVO != null) {
             logger.info("new login success");
@@ -43,7 +44,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
                 response.addCookie(loginCookie);
             }
 
-            Object destination = httpSession.getAttribute("destination");
+            Object destination = httpSession.getAttribute("returnUrl");
             response.sendRedirect(destination != null ? (String) destination : "/board/list");
         }
 
