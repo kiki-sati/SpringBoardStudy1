@@ -14,8 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.util.WebUtils;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.sql.Date;
 
 @Controller
 @RequestMapping(value = "/member")
@@ -84,7 +89,54 @@ public class MemberController {
         }
 
         model.addAttribute("member", memberVO);
+
+        // 로그인 유지를 선택할 경우
+        if (loginDTO.isUseCookie()) {
+            int amount = 60 * 60 * 24 * 7; // 7일
+            Date sessionLimit = new Date(System.currentTimeMillis() + (1000 * amount)); // 로그인 유지기간 설정
+            memberService.keepLogin(memberVO.getMemId(), httpSession.getId(), sessionLimit);
+        }
     }
+
+    // 로그아웃 처리
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws Exception {
+        Object object = httpSession.getAttribute("login");
+        if (object != null) {
+            MemberVO memberVO = (MemberVO) object;
+            httpSession.removeAttribute("login");
+            httpSession.invalidate();
+            Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
+            if (loginCookie != null) {
+                loginCookie.setPath("/");
+                loginCookie.setMaxAge(0);
+                response.addCookie(loginCookie);
+                memberService.keepLogin(memberVO.getMemId(), "none", new Date(System.currentTimeMillis()));
+            }
+        }
+        return "/member/logout";
+
+
+    }
+
+    // 로그아웃 처리
+/*    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws Exception {
+        Object object = httpSession.getAttribute("login");
+        if (object != null) {
+            MemberVO memberVO = (MemberVO) object;
+            httpSession.removeAttribute("login");
+            httpSession.invalidate();
+            Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
+            if (loginCookie != null) {
+                loginCookie.setPath("/");
+                loginCookie.setMaxAge(0);
+                response.addCookie(loginCookie);
+                userService.keepLogin(memberVO.getUserId(), "none", new Date());
+            }
+        }
+        return "/user/logout";*/
+
 
 
 

@@ -1,5 +1,6 @@
 package com.study.ansboard.commons.interceptor;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -16,6 +17,14 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
     private static final String LOGIN = "login";
     private static final Logger logger = LoggerFactory.getLogger(LoginInterceptor.class);
 
+
+    /*
+    자동로그인의 처리는 Session과 Cookie를 이용하여 처리합니다. 로그인 유지 기능이 사용되는 경우는 HttpSession에 login이란 이름으로 보관된 객체가 없지만 loginCookie가 존재하고,
+    이 경우 Interceptor에서 설정한 7일의 기간 사이에 접속한 적이 있다는 것을 확인한 뒤 과거의 로그인 시점에 기록된 정보를 이용해 다시 HttpSession에 login이란 이름으로 UserVO 객체를 보관해주어야 합니다.
+    이러한 개념을 바탕으로 User가 loginCookie를 가지고 있다면 그 값이 과거 로그인한 시점의 SessionId 라는 것을 알 수 있으며,
+    loginCookie 값을 사용해 DB에서 UserVO의 정보를 읽어온 뒤 이를 HttpSession에 보관하도록 하겠습니다.
+    */
+
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         HttpSession httpSession = request.getSession();
@@ -25,6 +34,15 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         if (memberVO != null) {
             logger.info("new login success");
             httpSession.setAttribute(LOGIN, memberVO);
+
+            if (request.getParameter("useCookie") != null) {
+                logger.info("remember me..."); // 쿠키 생성
+                Cookie loginCookie = new Cookie("loginCookie", httpSession.getId());
+                loginCookie.setPath("/board/list");
+                loginCookie.setMaxAge(60 * 60 * 24 * 7); // 전송
+                response.addCookie(loginCookie);
+            }
+
             Object destination = httpSession.getAttribute("destination");
             response.sendRedirect(destination != null ? (String) destination : "/board/list");
         }

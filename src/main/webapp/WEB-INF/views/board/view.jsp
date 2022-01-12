@@ -42,6 +42,9 @@
 <body>
 
 <div class="container">
+    <div class="mt-sm-5" >
+        <%@ include file="/WEB-INF/views/layout/nav.jsp"%>
+    </div>
     <h2 class="mt-sm-5">게시글 뷰</h2>
     <button class="btn btn-primary mb-2 edit" style="margin-left: 35%;">수정</button>
     <button class="btn btn-primary mb-2 ml-1 delete">삭제</button>

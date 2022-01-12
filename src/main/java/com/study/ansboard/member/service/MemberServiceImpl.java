@@ -6,6 +6,8 @@ import com.study.ansboard.member.vo.MemberVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+
 @Service
 public class MemberServiceImpl implements MemberService {
 
@@ -26,6 +28,17 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public int memIdCheck(String memId) {
         return memberDAO.memIdCheck(memId);
+    }
+
+    @Override
+    public void keepLogin(String memId, String sessionId, Date sessionLimit) throws Exception {
+        memberDAO.keepLogin(memId, sessionId, sessionLimit);
+
+    }
+
+    @Override
+    public MemberVO checkLoginBefore(String value) throws Exception {
+        return memberDAO.checkUserWithSessionKey(value);
     }
 
 

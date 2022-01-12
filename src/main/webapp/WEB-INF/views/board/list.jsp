@@ -24,11 +24,12 @@
 </head>
 <body>
 
-<div>
-    <%@ include file="/WEB-INF/views/layout/nav.jsp"%>
-</div>
+
 
 <div class="container">
+    <div class="mt-sm-5" >
+        <%@ include file="/WEB-INF/views/layout/nav.jsp"%>
+    </div>
     <h2 class="mt-sm-5">게시판 리스트</h2>
     <button class="btn btn-primary float-right mb-sm-2 move" data="write">글작성</button>
 

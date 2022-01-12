@@ -4,7 +4,7 @@ public class LoginDTO {
 
     private String memId;
     private String memPw;
-    private String memCookie;
+    private boolean useCookie;
 
     public String getMemId() {
         return memId;
@@ -22,12 +22,12 @@ public class LoginDTO {
         this.memPw = memPw;
     }
 
-    public String getMemCookie() {
-        return memCookie;
+    public boolean isUseCookie() {
+        return useCookie;
     }
 
-    public void setMemCookie(String memCookie) {
-        this.memCookie = memCookie;
+    public void setUseCookie(boolean useCookie) {
+        this.useCookie = useCookie;
     }
 
     @Override
@@ -35,7 +35,7 @@ public class LoginDTO {
         return "LoginDTO{" +
                 "memId='" + memId + '\'' +
                 ", memPw='" + memPw + '\'' +
-                ", memCookie='" + memCookie + '\'' +
+                ", useCookie=" + useCookie +
                 '}';
     }
 }

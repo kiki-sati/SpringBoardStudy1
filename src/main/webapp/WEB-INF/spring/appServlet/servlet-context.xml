@@ -22,9 +22,11 @@
         <beans:property name="prefix" value="/WEB-INF/views/"/>
         <beans:property name="suffix" value=".jsp"/>
     </beans:bean>
+
     <!-- Interceptor -->
     <beans:bean id="loginInterceptor" class="com.study.ansboard.commons.interceptor.LoginInterceptor"/>
     <beans:bean id="authInterceptor" class="com.study.ansboard.commons.interceptor.AuthInterceptor"/>
+    <beans:bean id="rememberMeInterceptor" class="com.study.ansboard.commons.interceptor.RememberMeInterceptor"/>
     <interceptors>
         <interceptor>
             <mapping path="/member/loginPost"/>
@@ -38,6 +40,13 @@
             <mapping path="/member/mypage"/>
             <beans:ref bean="authInterceptor"/>
         </interceptor>
+
+        <interceptor>
+            <mapping path="/**/"/>
+            <beans:ref bean="rememberMeInterceptor"/>
+        </interceptor>
+
+
     </interceptors>
 
 
