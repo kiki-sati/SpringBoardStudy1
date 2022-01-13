@@ -20,4 +20,7 @@ public interface MemberService {
     // 로그인 이력 입력
     int insertLoginInfo(MemberVO memberVO) throws Exception;
 
+    // 회원 정보 수정
+    void memberUpdate (MemberVO memberVO) throws Exception;
+
 }

@@ -31,5 +31,8 @@
 	</bean>
 
 
+	<bean name="ajaxView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
+
+
 </beans>
 

@@ -1,26 +1,30 @@
 package com.study.ansboard.member.controller;
 
+import com.study.ansboard.commons.interceptor.LoginInterceptor;
+import com.study.ansboard.commons.util.StringUtil;
 import com.study.ansboard.member.service.MemberService;
 import com.study.ansboard.member.vo.LoginDTO;
 import com.study.ansboard.member.vo.MemberVO;
+import org.json.simple.JSONObject;
 import org.mindrot.jbcrypt.BCrypt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.util.WebUtils;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.sql.Date;
+import java.util.Random;
 
 @Controller
 @RequestMapping(value = "/member")
@@ -29,6 +33,7 @@ public class MemberController {
     @Autowired
     private MemberService memberService;
     private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
+    private MappingJackson2JsonView ajaxView;
 
     // 회원가입 페이지
     @RequestMapping(value = "/join", method = RequestMethod.GET)
@@ -80,21 +85,23 @@ public class MemberController {
 
     // 로그인 처리
     @RequestMapping(value = "/loginPost", method = RequestMethod.POST)
-    public void loginPOST(LoginDTO loginDTO, HttpSession httpSession, Model model, HttpServletRequest request, HttpServletResponse response ) throws Exception {
+    public String loginPOST(LoginDTO loginDTO, HttpSession httpSession, Model model, HttpServletRequest request, HttpServletResponse response ) throws Exception {
 
         MemberVO memberVO = memberService.memberLogin(loginDTO);
 
-
         if (memberVO == null || !BCrypt.checkpw(loginDTO.getMemPw(), memberVO.getMemPw())) {
-            return;
+            return "member/loginPost";
         }
-
+        
+        model.addAttribute("member", memberVO);
+        
         logger.info("로그인 성공!");
 
         memberVO.setLoginIp(request.getRemoteAddr());
         memberService.insertLoginInfo(memberVO);
 
-        model.addAttribute("member", memberVO);
+        return "board/list";
+        //model.addAttribute("member", memberVO);
     }
 
     // 로그아웃 처리
@@ -107,9 +114,62 @@ public class MemberController {
             httpSession.invalidate();
         }
         return "/member/logout";
-
-
     }
+
+    // 회원 정보 수정 페이지
+    @RequestMapping(value = "/memberUpdate", method = RequestMethod.GET)
+    public String memberUpdateView() throws Exception {
+        logger.info("마이페이지 진입!");
+
+        return "/member/mypage";
+    }
+
+    // 회원 정보 수정 처리
+    @RequestMapping(value = "/memberUpdate", method = RequestMethod.POST)
+    public String memberUpdate(MemberVO memberVO, HttpSession httpSession, RedirectAttributes redirectAttributes) throws Exception {
+        logger.info("마이페이지 수정 완료!");
+
+        LoginDTO loginDTO = new LoginDTO();
+
+        loginDTO.setMemId(memberVO.getMemId());
+
+        memberService.memberUpdate(memberVO);
+
+        String hashedPw = BCrypt.hashpw(memberVO.getMemPw(), BCrypt.gensalt());
+        memberVO.setMemPw(hashedPw);
+        memberService.memberUpdate(memberVO);
+
+        redirectAttributes.addFlashAttribute("msg", "REGISTERED");
+        MemberVO memberVO2 = memberService.memberLogin(loginDTO);
+        httpSession.setAttribute(LoginInterceptor.LOGIN, memberVO2);
+
+        return "redirect:/board/list";
+    }
+
+    @RequestMapping("/mypagePwd.json")
+    @ResponseBody
+    public String mypagePwd(@ModelAttribute("memberVO") MemberVO memberVO, ModelMap model, SessionStatus status, HttpServletRequest request) throws Exception {
+
+        Random random = new Random();
+        int num = random.nextInt(13) + 8;
+        String newPwd = StringUtil.getRandomNumStringSpecialChar(num);
+
+        String hashedPw = BCrypt.hashpw(newPwd, BCrypt.gensalt());
+        memberVO.setMemPw(hashedPw);
+
+        memberService.memberUpdate(memberVO);
+
+        JSONObject jsonObj = new JSONObject();
+        jsonObj.put("newPwd", newPwd);
+        //model.addAttribute("newPwd", newPwd);
+        //return new ModelAndView(ajaxView, model);
+
+        return jsonObj.toString();
+    }
+
+
+
+
 
     // 로그아웃 처리
 /*    @RequestMapping(value = "/logout", method = RequestMethod.GET)
@@ -160,8 +220,6 @@ public class MemberController {
         return "redirect:/login";
     }
 */
-
-
 }
 
 

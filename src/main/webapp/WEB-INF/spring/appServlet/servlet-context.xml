@@ -28,6 +28,7 @@
     <beans:bean id="authInterceptor" class="com.study.ansboard.commons.interceptor.AuthInterceptor"/>
     <beans:bean id="rememberMeInterceptor" class="com.study.ansboard.commons.interceptor.RememberMeInterceptor"/>
     <interceptors>
+    
         <interceptor>
             <mapping path="/member/loginPost"/>
             <beans:ref bean="loginInterceptor"/>

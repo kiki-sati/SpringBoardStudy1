@@ -6,10 +6,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Date;
-import java.util.HashMap;
-import java.util.Map;
-
 @Repository
 public class MemberDAOImpl implements MemberDAO {
 
@@ -46,5 +42,11 @@ public class MemberDAOImpl implements MemberDAO {
     @Override
     public int insertLoginInfo(MemberVO memberVO) throws Exception {
         return sqlSession.insert(namespace + ".insertLoginInfo", memberVO);
+    }
+
+    @Override
+    public void memberUpdate(MemberVO memberVO) throws Exception {
+        sqlSession.update(namespace + ".memberUpdate", memberVO);
+
     }
 }

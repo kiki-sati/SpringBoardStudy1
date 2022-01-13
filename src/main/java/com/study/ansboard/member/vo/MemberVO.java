@@ -9,6 +9,7 @@ public class MemberVO {
     private String memEmail;
     private String memRegDate;
     private String loginIp;
+    private String memPhoto;
 
 
     public int getMemNo() {
@@ -73,6 +74,14 @@ public class MemberVO {
 
     public void setLoginIp(String loginIp) {
         this.loginIp = loginIp;
+    }
+
+    public String getMemPhoto() {
+        return memPhoto;
+    }
+
+    public void setMemPhoto(String memPhoto) {
+        this.memPhoto = memPhoto;
     }
 }
 

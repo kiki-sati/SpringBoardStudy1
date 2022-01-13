@@ -6,7 +6,7 @@
 <ul>
     <li><a href="/board/list">목록</a></li>
     <li><a href="/board/write">글 작성</a></li>
-    <li><a href="#">마이페이지</a></li>
+    <li><a href="/member/memberUpdate">마이페이지</a></li>
     <li>
         <c:if test="${login != null}"><a href="/member/logout">로그아웃</a></c:if>
         <c:if test="${login == null}"><a href="/login">로그인</a></c:if>

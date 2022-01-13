@@ -5,12 +5,13 @@
 
     <select id="memberLogin" resultType="MemberVO" parameterType="MemberVO">
         /* MemberDAO.memberLogin */
-     <![CDATA[
-        SELECT
-               MEM_NO   memNo
+    <![CDATA[
+        SELECT MEM_NO   memNo
              , MEM_ID   memId
              , MEM_PW   memPw
              , MEM_NAME memName
+             , PHONE_NUM phoneNum
+             , MEM_EMAIL memEmail
         FROM tb_member
         WHERE MEM_ID = #{memId}
         ]]>
@@ -28,7 +29,7 @@
 
     <insert id="memberJoin" parameterType="MemberVO">
         /* MemberDAO.memberJoin*/
-     <![CDATA[
+    <![CDATA[
         INSERT
         INTO tb_member ( MEM_ID
                        , MEM_PW
@@ -47,7 +48,7 @@
 
     <insert id="insertLoginInfo" parameterType="MemberVO">
         /* MemberDAO.insertLoginInfo */
-     <![CDATA[
+    <![CDATA[
         INSERT
         INTO tb_login_log ( MEM_ID
                           , LOGIN_IP)
@@ -55,5 +56,27 @@
                , #{loginIp})
         ]]>
     </insert>
+
+    <update id="memberUpdate" parameterType="MemberVO">
+        /* MemberDao.memberUpdate */
+        UPDATE tb_member
+        SET MEM_PW    = #{memPw}
+          <if test="memName != null and memName !=''">
+          <![CDATA[
+          , MEM_NAME  = #{memName}
+          ]]>
+          </if>
+        <if test="phoneNum != null and phoneNum !=''">
+            <![CDATA[
+          , PHONE_NUM  = #{phoneNum}
+          ]]>
+        </if>
+        <if test="memEmail != null and memEmail !=''">
+            <![CDATA[
+          , MEM_EMAIL  = #{memEmail}
+          ]]>
+        </if>
+        WHERE MEM_NO = #{memNo}
+    </update>
 
 </mapper>

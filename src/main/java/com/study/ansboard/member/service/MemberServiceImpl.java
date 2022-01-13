@@ -41,5 +41,10 @@ public class MemberServiceImpl implements MemberService {
         return memberDAO.insertLoginInfo(memberVO);
     }
 
+    @Override
+    public void memberUpdate(MemberVO memberVO) throws Exception {
+        memberDAO.memberUpdate(memberVO);
+    }
+
 
 }
