@@ -14,6 +14,11 @@ public class BoardDAOImpl implements BoardDAO{
     private SqlSession sqlSession;
     private static final String namespace="com.study.ansboard.sqls.BoardMapper";
 
+    @Override
+    public List<BoardVO> getCommentList(int bNo) {
+        return sqlSession.selectList(namespace+".getCommentList");
+    }
+
     // 게시글 목록
     @Override
     public List<BoardVO> list() {
@@ -64,6 +69,12 @@ public class BoardDAOImpl implements BoardDAO{
     @Override
     public void delete(BoardVO boardVO) {
         sqlSession.delete(namespace+".delete", boardVO);
+    }
+
+    @Override
+    public Integer insertComm(BoardVO boardVO) {
+        sqlSession.insert(namespace + ".insertComm", boardVO);
+        return null;
     }
 
 

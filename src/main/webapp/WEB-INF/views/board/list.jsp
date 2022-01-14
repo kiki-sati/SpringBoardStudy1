@@ -61,7 +61,7 @@
             </tr>
 
         </c:forEach>
-        </tbody>
+    </tbody>
     </table>
 
     <ul class="pagination" style="margin-left: 42%">
@@ -73,8 +73,7 @@
         </li>
         <li class="page-item" active>
             <a class="page-link" href="#">3</a>
-        </li>
-
+        </li>jk
     </ul>
 </div>
 

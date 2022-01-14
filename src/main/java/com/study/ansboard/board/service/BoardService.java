@@ -19,4 +19,5 @@ public interface BoardService {
     // 삭제
     void delete(BoardVO boardVO) throws Exception;
 
+
 }

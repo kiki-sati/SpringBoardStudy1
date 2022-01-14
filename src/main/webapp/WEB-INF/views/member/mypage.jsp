@@ -34,6 +34,10 @@
                 <a href="javascript:void(0);" id="pwdArea" onclick="fncChangeAdminPwd();">비밀번호 재설정</a>
             </div>
 
+<%--        javascript:void(0) 를 사용하는 이유
+            undefined를 얻기 위해서. 링크가 정상적으로 동작하지 않게 만들기 위해서 쓴다.
+--%>
+
             <div class="form-group has-feedback">
                 <label class="control-label">이름</label>
                 <input class="form-control" type="text" value="${login.memName}" readonly/>
@@ -145,13 +149,12 @@
         $.ajax({
             method: "POST",
             url: "mypagePwd.json",
-            data: $("form").serialize(),
+            data: $("form").serialize(),    // serialize : form안에 있는 데이터를 한번에 보내준다.
             dataType: "json",
             success: function (data) {
+                // prompt : 사용자에게 텍스트를 입력하라는 메시지를 띄워줌과 동시에, 입력 필드를 함께 제공
                 prompt("비밀번호가 재설정되었습니다.", data.newPwd);
-                $("#newPwd").val(data.newPwd);
-                $("#newPwd").select();
-                document.execCommand("copy");
+                document.execCommand("copy"); /* execCommand : 문자를 클립보드로 복사 */
             },
             error: function (request, status, error) {
                 alert("오류가 발생하였습니다. 잠시 후 다시 시도해주세요.");

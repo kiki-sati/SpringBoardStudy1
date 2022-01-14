@@ -48,7 +48,7 @@
         <input readonly="readonly" type="text" class="form-control w-50 mb-sm-1" name="regDate" value="${board.regDate} ">
         <input readonly="readonly" type="text" class="form-control w-50 mb-sm-1" name="regDate" value="${board.editDate} ">
         <input type="text" class="form-control w-50 mb-sm-1" name="title" placeholder="제목" maxlength="100">
-        <textarea rows="10" class="form-control w-50 mb-sm-1" name="content" maxlength="1000"></textarea>
+        <textarea rows="10" id="postContent" class="form-control w-50 mb-sm-1" name="content" maxlength="1000"></textarea>
         <div id="count">(0/1000)</div>
 
     </form>

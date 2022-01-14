@@ -3,8 +3,6 @@ package com.study.ansboard.member.dao;
 import com.study.ansboard.member.vo.LoginDTO;
 import com.study.ansboard.member.vo.MemberVO;
 
-import java.sql.Date;
-
 
 public interface MemberDAO {
 
@@ -25,5 +23,7 @@ public interface MemberDAO {
 
     // 회원 정보 수정
     void memberUpdate (MemberVO memberVO) throws Exception;
+
+
 
 }

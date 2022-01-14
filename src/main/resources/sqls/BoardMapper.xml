@@ -141,6 +141,32 @@
         ]]>
     </update>
 
+    <insert id="insertComm" parameterType="BoardVO">
+        /* BoardDAO.insertComm */
+        <![CDATA[
+        INSERT INTO tb_comments (
+                B_NO
+              , CM_CONTENT
+              , CM_WIRTER
+        VALUES ( #{bNo2}
+               , #{cmContent}
+               , #{cmWriter}
+        ]]>
+    </insert>
+    
+    <select id="getCommentList" resultType="BoardVO" parameterType="boardVO">
+        /* BoardDAO.getCommentList */
+		<![CDATA[
+        SELECT CM_IDX                                 cmIdx
+             , CM_CONTENT                             cmContent
+             , DATE_FORMAT(CM_DATE, '%Y/%m/%d %H:%i') cmDate
+             , CM_WRITER                              cmWriter
+        FROM tb_comments
+        WHERE B_NO = #{bNo}
+        ORDER BY CM_DATE DESC
+        ]]>
+    </select>
+
 
 
 </mapper>

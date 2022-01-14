@@ -16,6 +16,13 @@ public class BoardVO {
     private String editDate;
     private String boardParentSeq;
 
+    // 댓글
+    private int cmNo;
+    private String cmContent;
+    private String cmDate;
+    private String cmWriter;
+    private String bNo2;
+
     public int getbNo() {
         return bNo;
     }
@@ -104,6 +111,46 @@ public class BoardVO {
         this.boardParentSeq = boardParentSeq;
     }
 
+    public int getCmNo() {
+        return cmNo;
+    }
+
+    public void setCmNo(int cmNo) {
+        this.cmNo = cmNo;
+    }
+
+    public String getCmContent() {
+        return cmContent;
+    }
+
+    public void setCmContent(String cmContent) {
+        this.cmContent = cmContent;
+    }
+
+    public String getCmDate() {
+        return cmDate;
+    }
+
+    public void setCmDate(String cmDate) {
+        this.cmDate = cmDate;
+    }
+
+    public String getCmWriter() {
+        return cmWriter;
+    }
+
+    public void setCmWriter(String cmWriter) {
+        this.cmWriter = cmWriter;
+    }
+
+    public String getbNo2() {
+        return bNo2;
+    }
+
+    public void setbNo2(String bNo2) {
+        this.bNo2 = bNo2;
+    }
+
     @Override
     public String toString() {
         return "BoardVO{" +
@@ -118,6 +165,10 @@ public class BoardVO {
                 ", regDate='" + regDate + '\'' +
                 ", editDate='" + editDate + '\'' +
                 ", boardParentSeq='" + boardParentSeq + '\'' +
+                ", cmNo=" + cmNo +
+                ", cmContent='" + cmContent + '\'' +
+                ", cmDate='" + cmDate + '\'' +
+                ", cmWriter='" + cmWriter + '\'' +
                 '}';
     }
 }

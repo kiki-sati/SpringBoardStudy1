@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface BoardDAO {
 
+
+
     List<BoardVO> list();
 
     BoardVO view(int bNo);
@@ -24,6 +26,11 @@ public interface BoardDAO {
 
     // 삭제
     void delete(BoardVO boardVO);
+
+    // 댓글
+    Integer insertComm(BoardVO boardVO);
+
+    List<BoardVO> getCommentList(int bNo);
 
 
 }

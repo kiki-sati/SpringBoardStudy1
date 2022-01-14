@@ -1,21 +1,22 @@
 package com.study.ansboard.board.controller;
 
+import com.study.ansboard.board.service.BoardService;
 import com.study.ansboard.board.vo.BoardVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import com.study.ansboard.board.service.BoardService;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
 @Controller
 @RequestMapping(value = "/board")
 public class BoardController {
-	
+
 	@Autowired
 	private BoardService boardService;
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
@@ -25,7 +26,7 @@ public class BoardController {
 	public String moveList(Model model) throws Exception {
 		logger.info("move list");
 		List<BoardVO> list = boardService.list();
-		model.addAttribute("list",list);
+		model.addAttribute("list", list);
 		return "board/list";
 	}
 
@@ -49,15 +50,15 @@ public class BoardController {
 	}
 
 	// 답글 처리
-	@RequestMapping(value="/writeReply", method=RequestMethod.GET)
-	public String writeReply(Model model,BoardVO boardVO) {
+	@RequestMapping(value = "/writeReply", method = RequestMethod.GET)
+	public String writeReply(Model model, BoardVO boardVO) {
 		logger.info("move writeReply");
 		model.addAttribute("board", boardVO);
 		return "board/writeReply";
 	}
 
 	// 작성 페이지 이동
-	@RequestMapping(value="/write", method=RequestMethod.GET)
+	@RequestMapping(value = "/write", method = RequestMethod.GET)
 	public String moveWrite(Model model, BoardVO boardVO) {
 		logger.info("move write");
 		model.addAttribute("board", boardVO);
@@ -70,7 +71,7 @@ public class BoardController {
 
 		BoardVO board = boardService.view(boardVO.getbNo());
 
-		model.addAttribute("board",board);
+		model.addAttribute("board", board);
 		return "board/update";
 	}
 
@@ -92,6 +93,8 @@ public class BoardController {
 
 		return "redirect:/board/list";
 	}
+
+
 
 
 }

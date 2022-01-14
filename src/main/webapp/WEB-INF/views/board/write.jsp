@@ -9,11 +9,14 @@
     <title>게시판 리스트</title>
 
     <script>
-        // 게시판 이동
+
         $(document).ready(function () {
+            // 게시판 이동
             $(".list").click(function () {
                 location.href = "/board/list";
             });
+
+            // 글자수 카운트
             $('#postContent').on('keyup', function () {
                 $('#count').html("(" + $(this).val().length + " / 1000)");
                 if ($(this).val().length > 1000) {
